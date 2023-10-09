@@ -1,0 +1,23 @@
+.Cart_Component {
+  width: 38%;
+  min-height: 920px;
+  display: inline-block;
+  margin-right: 1%;
+  margin-left: 1%;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  padding: 10px;
+  background-color: #d3d3d3;
+}
+.Product_Component {
+  position: absolute;
+  width: 58%;
+  height: 920px;
+  display: inline-block;
+  margin-right: 1%;
+  margin-left: 1%;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  padding: 10px;
+  background-color: #d3d3d3;
+}
