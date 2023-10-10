@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Products.css";
-function Product({ products }) {
+function Product({ products,onItemChange }) {
   const [cartItems, setCartItems] = useState([]);
   const addToCart = (product) => {
     const existingItem = cartItems.find((item) => item.name === product.name);
@@ -13,11 +13,17 @@ function Product({ products }) {
           : item
       );
       setCartItems(updatedCart);
+      onItemChange(updatedCart);
+
     } else {
       // If the item doesn't exist in the cart, add it with quantity 1
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      onItemChange([...cartItems, { ...product, quantity: 1 }]);
     }
   };
+useEffect(() => {
+  
+}, [products])
 
   return (
     <div>
