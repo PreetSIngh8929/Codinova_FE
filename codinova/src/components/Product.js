@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Products.css";
-function Product({ products,onItemChange }) {
+function Product({ products,onItemChange,x }) {
   const [cartItems, setCartItems] = useState([]);
   const addToCart = (product) => {
     const existingItem = cartItems.find((item) => item.name === product.name);
@@ -22,8 +22,8 @@ function Product({ products,onItemChange }) {
     }
   };
 useEffect(() => {
-  
-}, [products])
+  setCartItems(x);
+}, [x])
 
   return (
     <div>

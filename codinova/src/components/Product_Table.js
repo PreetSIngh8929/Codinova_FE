@@ -1,32 +1,30 @@
 import React, { useEffect, useState } from "react";
 
 const ProductTable = ({ products, onItemChange }) => {
-  console.log(products);
   var x = products.length * 20.45;
-  const keysArray = Object.keys(products);
-const mappedKeysArray = keysArray.map((key) => products[key]);
-console.log(mappedKeysArray,"fdrn",products);
 
   var [cartItems, setCartItems] = useState(products);
   const addToCart = (x, operator) => {
-
     if (operator === "+") {
-        console.log('hi',cartItems)
-      const updatedCart = products.map((y) => 
-        y.name === x.name
-          ? { ...y, quantity: y.quantity + 1 }
-          : y
+      const updatedCart = products.map((y) =>
+        y.name === x.name ? { ...y, quantity: y.quantity + 1 } : y
       );
 
       setCartItems(updatedCart);
       onItemChange(updatedCart);
     } else {
-      if (x.quantity !== 0) {
+      if (x.quantity > 1) {
         const updatedCart = products.map((item) =>
-          item.name === x.name
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
+          item.name === x.name ? { ...item, quantity: item.quantity - 1 } : item
         );
+        setCartItems(updatedCart);
+        onItemChange(updatedCart);
+      } else {
+        var updatedCart = products.map((item) =>
+          item.name === x.name ? { ...item, quantity: item.quantity - 1 } : item
+        );
+        updatedCart = products.filter((obj) => obj.name !== x.name);
+
         setCartItems(updatedCart);
         onItemChange(updatedCart);
       }
@@ -53,9 +51,21 @@ console.log(mappedKeysArray,"fdrn",products);
                 <td>${product.price}</td>
                 <td>
                   {" "}
-                  <button onClick={function() { addToCart(product, "-"); }}>-</button>
+                  <button
+                    onClick={function () {
+                      addToCart(product, "-");
+                    }}
+                  >
+                    -
+                  </button>
                   {" " + product.quantity + " "}
-                  <button onClick={function() { addToCart(product, "+"); }}>+</button>
+                  <button
+                    onClick={function () {
+                      addToCart(product, "+");
+                    }}
+                  >
+                    +
+                  </button>
                 </td>
                 <td>${product.price * product.quantity}</td>
               </tr>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import VerticalTable from "./components/Price_Calculator";
 import Product from "./components/Product";
@@ -16,6 +16,9 @@ function App() {
   const handleItemsChange = (item) => {
     setCartItems(item);
   };
+useEffect(() => {
+console.log('called');
+}, [cartItems])
 
   return (
     <div className="App">
@@ -69,7 +72,7 @@ function App() {
         </div>
       </div>
       <div className="Product_Component">
-        <Product products={products} onItemChange={handleItemsChange} />
+        <Product products={products} x={cartItems} onItemChange={handleItemsChange} />
       </div>
     </div>
   );
