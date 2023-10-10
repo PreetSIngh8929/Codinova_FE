@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Codinova_FE/static/css/main.583edc1d.css",
+    "main.js": "/Codinova_FE/static/js/main.fd920b60.js",
+    "static/js/787.0298f59c.chunk.js": "/Codinova_FE/static/js/787.0298f59c.chunk.js",
+    "index.html": "/Codinova_FE/index.html",
+    "main.583edc1d.css.map": "/Codinova_FE/static/css/main.583edc1d.css.map",
+    "main.fd920b60.js.map": "/Codinova_FE/static/js/main.fd920b60.js.map",
+    "787.0298f59c.chunk.js.map": "/Codinova_FE/static/js/787.0298f59c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.583edc1d.css",
+    "static/js/main.fd920b60.js"
+  ]
+}
