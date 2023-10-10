@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../Products.css";
-function Product({ products,onItemChange,x }) {
+function Product({ products,onItemChange,x,PsubTotal ,subTotalChange}) {
   const [cartItems, setCartItems] = useState([]);
+  const [subTotal,setSubTotal] = useState(PsubTotal);
   const addToCart = (product) => {
     const existingItem = cartItems.find((item) => item.name === product.name);
 
@@ -12,19 +13,37 @@ function Product({ products,onItemChange,x }) {
           ? { ...item, quantity: item.quantity + 1 }
           : item
       );
+      setSubTotal(subTotal+product.price);
+      subTotalChange(subTotal+product.price);
       setCartItems(updatedCart);
       onItemChange(updatedCart);
 
     } else {
       // If the item doesn't exist in the cart, add it with quantity 1
+      setSubTotal(subTotal+product.price);
+      subTotalChange(subTotal+product.price);
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
       onItemChange([...cartItems, { ...product, quantity: 1 }]);
     }
   };
 useEffect(() => {
+    console.log('called');
+    if(x.length > 0) {
   setCartItems(x);
+    }
+    else{
+        setCartItems([]);
+ 
+    }
+    
 }, [x])
-
+useEffect(() => {
+    if(PsubTotal!=0){
+    setSubTotal(PsubTotal)
+    }
+    
+}, [x])
+console.log(subTotal);
   return (
     <div>
       {products.map((item, index) => (

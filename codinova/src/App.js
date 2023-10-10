@@ -4,26 +4,50 @@ import VerticalTable from "./components/Price_Calculator";
 import Product from "./components/Product";
 import ProductTable from "./components/Product_Table";
 import products from "./data/data.json";
+import Popup from "./components/popup";
 function App() {
-  const data = [
-    { label: "SubTotal", value: "0.000 EUR" },
-    { label: "VAT tax", value: 30 },
-    { label: "Discount", value: 10 },
-    { label: "Total", value: "0.000 EUR" },
-  ];
+ 
   const [cartItems, setCartItems] = useState("");
+  const [subTotal, setSubTotal] = useState(0);
+
   console.log(cartItems);
   const handleItemsChange = (item) => {
     setCartItems(item);
   };
+  const handleSubTotalChange = (x) => {
+    console.log(x);
+    setSubTotal(x);
+  };
+  const handleVisible = (x) => {
+    setIsVisible(x);
+  };
+  console.log(subTotal);
 useEffect(() => {
 console.log('called');
 }, [cartItems])
+const data = [
+  { label: "SubTotal", value: subTotal },
+  { label: "VAT tax", value: "30%" },
+  { label: "Discount", value: "10%" },
+  { label: "Total", value: subTotal+subTotal*(30/100)-subTotal*(10/100) },
+];
+const cancelSale=()=>{
+  console.log("cancelSale");
+setCartItems("");
+setSubTotal(0);
+}
+const [isVisible,setIsVisible]=useState(false);
+useEffect(() => {
+  
+}, [cartItems])
+useEffect(() => {
+  
+}, [isVisible])
 
   return (
     <div className="App">
       <div className="Cart_Component">
-        <ProductTable style={{ minHeight: "700px" }} products={cartItems} onItemChange={handleItemsChange} />
+        <ProductTable style={{ minHeight: "500px" }} products={cartItems} onItemChange={handleItemsChange} PsubTotal={subTotal}  subTotalChange={handleSubTotalChange}/>
         {!cartItems && (
           <div
             style={{
@@ -43,7 +67,8 @@ console.log('called');
             THERE ARE NO PRODUCTS
           </div>
         )}
-        <VerticalTable data={data} />
+
+        <VerticalTable data={data} subTotal={subTotal}/>
         <div style={{ width: "100%" }}>
           <button
             type="button"
@@ -54,6 +79,7 @@ console.log('called');
               backgroundColor: "red",
               color: "white",
             }}
+            onClick={cancelSale}
           >
             Cancel Sale
           </button>
@@ -66,14 +92,18 @@ console.log('called');
               backgroundColor: "#4cbb17",
               color: "white",
             }}
+            onClick={()=>setIsVisible(true)}
           >
             Process Sale
           </button>
         </div>
       </div>
+      
       <div className="Product_Component">
-        <Product products={products} x={cartItems} onItemChange={handleItemsChange} />
+        <Product products={products} x={cartItems} onItemChange={handleItemsChange} PsubTotal={subTotal} subTotalChange={handleSubTotalChange}/>
       </div>
+      <Popup setVisible={isVisible} handleVisible={handleVisible} products={cartItems} PsubTotal={subTotal} />
+
     </div>
   );
 }

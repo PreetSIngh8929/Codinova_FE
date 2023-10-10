@@ -1,6 +1,7 @@
 import React from "react";
 import "../Price_Calculator.css";
-function VerticalTable({ data }) {
+function VerticalTable({ data ,subTotal}) {
+  console.log(subTotal);
   return (
     <>
       <div className="vertical-table">
